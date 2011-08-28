@@ -5,8 +5,8 @@ require_once 'config.php';
 header( 'Content-Type:application/json' );
 
 function generateRandomString($length) {
-  $characters = ’0123456789abcdefghijklmnopqrstuvwxyz’;
-  $string = ”;    
+  $characters = '0123456789abcdefghijklmnopqrstuvwxyz';
+  $string = '';
   for ($p = 0; $p < $length; $p++) {
     $string .= $characters[mt_rand(0, strlen($characters))];
   }
