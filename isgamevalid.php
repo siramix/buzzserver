@@ -1,4 +1,3 @@
-<?php
 require_once 'config.php';
 
 header( 'Content-Type:application/json' );
@@ -14,9 +13,7 @@ if($sth->execute( array($token) ))
   $r = $sth->fetch();
   if($r)
     {
-    $arr = array('id'=>$r['id'],
-                 'status'=>1);
-    print json_encode($arr);
+    print json_encode(array('status'=>1));
     }
   else
     {
