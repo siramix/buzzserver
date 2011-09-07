@@ -1,14 +1,16 @@
 <?php
 
+require_once 'constants.php';
+
 require_once 'config.php';
 
-header( 'Content-Type:application/json' );
+header(CONTENT_TYPE);
 
 $token = $_REQUEST['token'];
 $title = $_REQUEST['title'];
 $badwords = $_REQUEST['badwords'];
 
-$dd = new PDO('mysql:host=localhost;dbname=siramix_buzzing', $u, $p);
+$dd = new PDO(DB_CONNECTION_STRING, $u, $p);
 
 $sql = 'SELECT id FROM games WHERE token= ? ';
 $sth = $dd->prepare($sql);
