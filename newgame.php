@@ -10,7 +10,7 @@ header(CONTENT_TYPE);
 $lat = $_REQUEST['lat'];
 $long = $_REQUEST['long'];
 
-$point = 'POINT('.$lat.' '.$long.')';
+$point = 'POINT('.$long.' '.$lat.')';
 
 $token = generateRandomString(PLAYER_TOKEN_LENGTH);
 

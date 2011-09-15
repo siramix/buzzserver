@@ -7,18 +7,30 @@ require_once 'config.php';
 
 header(CONTENT_TYPE);
 
-$token = $_REQUEST['token'];
+$lat = $_REQUEST['lat'];
+$long = $_REQUEST['long'];
+
+// Get bounding box and format it for MySQL
+$bbox = getBoundingBox( $lat, $long, PLAYER_RADIUS );
+$bboxString = 'POLYGON(('.
+  $bbox[2].' '.$bbox[0].','.
+  $bbox[2].' '.$bbox[1].','.
+  $bbox[3].' '.$bbox[1].','.
+  $bbox[3].' '.$bbox[0].','.
+  $bbox[2].' '.$bbox[0].'))';
 
 $dd = new PDO(DB_CONNECTION_STRING, $u, $p);
-$sql = 'SELECT id FROM games WHERE token= ? ';
+$sql = 'SELECT token FROM games WHERE MBRContains(GeomFromText(?),location)';
 $sth = $dd->prepare($sql);
-if($sth->execute( array($token) ))
+if($sth->execute( array($bboxString) ))
   {
-  $sth->setFetchMode(PDO::FETCH_BOTH);
+  $sth->setFetchMode(PDO::FETCH_NUM);
   $r = $sth->fetch();
   if($r)
     {
-    print json_encode(array('status'=>1));
+    $arr = array('games'=>$r,
+                 'status'=>1);
+    print json_encode($arr);
     }
   else
     {
