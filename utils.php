@@ -1,5 +1,25 @@
 <?php
+/*****************************************************************************
+ *  Buzzserver enables online buzzing between buzzwords clients.
+ *  Copyright (C) 2011 Siramix Team
+ *  
+ *  This program is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ ****************************************************************************/
 
+/**
+ * Generate an alpha-numeric string of specified length.
+ */
 function generateRandomString($length)
 {
   $characters = '0123456789abcdefghijklmnopqrstuvwxyz';
@@ -11,6 +31,16 @@ function generateRandomString($length)
   return $string;
 }
 
+/**
+ * hacked out by ben brown <ben@xoxco.com>
+ * http://xoxco.com/clickable/php-getboundingbox
+ *
+ * Given a latitude and longitude in degrees (40.123123,-72.234234) and a
+ * distance in miles this function calculates a bounding box with corners
+ * $distance_in_miles away from the point specified.
+ * 
+ * returns $min_lat,$max_lat,$min_lon,$max_lon
+ */
 function getBoundingBox( $lat_degrees, $lon_degrees, $distance_in_miles )
 {
   $radius = 3963.1; // of earth in miles
