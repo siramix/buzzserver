@@ -42,7 +42,7 @@ $sth = $dd->prepare($sql);
 if($sth->execute( array($bboxString) ))
   {
   $sth->setFetchMode(PDO::FETCH_NUM);
-  $r = $sth->fetch();
+  $r = $sth->fetchAll();
   if($r)
     {
     $arr = array('games'=>$r,
